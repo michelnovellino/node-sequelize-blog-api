@@ -41,11 +41,11 @@ const hash = function(value) {
   var hash = bcrypt.hashSync(value, salt);
   return hash;
 };
-console.log(hash("aaaa") + "<<<<<");
+
 User.belongsTo(Role);
 
 // Note: using `force: true` will drop the table if it already exists
-User.sync({ force: true }).then(act => {
+/* User.sync({ force: true }).then(act => {
   return User.create({
     first_name: "Michel",
     last_name: "Novellino",
@@ -53,6 +53,6 @@ User.sync({ force: true }).then(act => {
     password: "astrasd",
     role_id: 1
   });
-});
+}); */
 
 module.exports = User;
