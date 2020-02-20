@@ -43,18 +43,39 @@ controller.add = function(req, res) {
       res.status(200).json({ data: user, created });
     })
     .catch(err => {
-      res.status(404).json({ error: err });
+      res.status(400).json({ error: err });
     });
 };
 controller.edit = function(req, res, next) {
   let id = req.params.id;
+  let body = req.body;
   if (!id) res.status(400).json({ error: "id not provided" });
-  User.findByPk(id)
-    .then(users => {
-      res.status(200).json({ data: users });
+  User.update(body, { where: { id: id } })
+    .then(response => {
+      if (response[0] == 0) {
+        res.status(200).json({ data: "User not found" });
+      } else {
+        res.status(200).json({ data: "User updated " + response });
+      }
     })
     .catch(err => {
       res.status(404).json({ error: err });
+    });
+};
+controller.delete = function(req, res, next) {
+  let id = req.params.id;
+  if (!id) res.status(400).json({ error: "id not provided" });
+  User.destroy({ where: { id: id } })
+    .then(response => {
+      console.log(response);
+      if (response == 0) {
+        res.status(404).json({ data: "User not found" });
+      } else {
+        res.status(200).json({ data: "User Deleted " + response });
+      }
+    })
+    .catch(err => {
+      res.status(400).json({ error: err });
     });
 };
 module.exports = controller;
