@@ -9,25 +9,28 @@ const Role = Sequelize.define(
       allowNull: false
     }
   },
+
   {
     // options
+    underscored: true
   }
 );
-
-
-/*  Sequelize
-  .query("SET FOREIGN_KEY_CHECKS = 0", { raw: true })
-  .then(function() {
-    Role.sync({ force: true }).then(function() {
-      Role.create({
-        name: "user"
-      });
-      Role.create({
-        name: "admin"
-      });
-      Role.create({
-        name: "super"
-      });
+Role.sync({ force: false }).then(async act => {
+  /*   let exist = await Role.findAll();
+  console.log("EMPEZO ROLES");
+  console.log("exist >>>>> ", exist.roles)
+  if (!exist || exist.length <= 0) {
+    await Role.create({
+      name: "user"
     });
-  });  */
+    await Role.create({
+      name: "admin"
+    });
+    await Role.create({
+      name: "super"
+    });
+  }
+  console.log("TERMINO ROLES"); */
+});
+
 module.exports = Role;

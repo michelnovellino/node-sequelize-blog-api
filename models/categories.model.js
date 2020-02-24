@@ -1,17 +1,30 @@
 const sequelize = require("sequelize");
 const Sequelize = require("./db");
-const Categories = Sequelize.define(
+const Category = Sequelize.define(
   "categories",
   {
     // attributes
     name: {
       type: sequelize.STRING,
-      allowNull: false
+      allowNull: false,
+      unique: true
     }
   },
   {
     // options
+    underscored: true
   }
 );
-
-module.exports = Categories;
+Category.sync({ force: false }).then(async act => {
+  let exist = await Category.findOne({ where: { name: "uncategorized" } });
+  if (!exist) {
+    Category.create({ name: "uncategorized" })
+      .then(category => {
+        console.log("created >>>,", { data: category });
+      })
+      .catch(err => {
+        console.error({ error: err });
+      });
+  }
+});
+module.exports = Category;
