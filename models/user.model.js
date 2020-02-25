@@ -29,28 +29,29 @@ const User = Sequelize.define(
         isEmail: true
       }
     },
-    role_id: {
+     role_id: {
       type: sequelize.INTEGER,
       references: { model: "roles", key: "id" }
-    }
+    } 
   },
   {
     // options
     underscored: true
   }
 );
-User.hasOne(Role);
+
 const hash = function(value) {
   var salt = bcrypt.genSaltSync(10);
   var hash = bcrypt.hashSync(value, salt);
   return hash;
 };
-
-User.belongsTo(Role, { onDelete: "restrict" });
+ 
+//User.belongsTo(Role, { onDelete: "restrict" }); */
+// User.sync({ force: false }).then(async act => {})
 
 // Note: using `force: true` will drop the table if it already exists
-User.sync({ force: false }).then(async act => {
-/*   let exist = await User.findOne({
+  /* User.sync({ force: false }).then(async act => {
+  let exist = await User.findOne({
     where: { email: "myemailitsnotherelol@gmail.com" }
   });
   if (!exist) {
@@ -63,7 +64,7 @@ User.sync({ force: false }).then(async act => {
     });
   }
   console.log( "TERMINO USERS")
- */
+ 
 });
-
+*/
 module.exports = User;

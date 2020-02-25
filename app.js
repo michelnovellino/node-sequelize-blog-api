@@ -11,6 +11,7 @@ const usersRouter = require("./routes/users");
 const tagsRouter = require("./routes/tags");
 const entriesRouter = require("./routes/entry");
 const categoriesRouter = require("./routes/categories");
+const attachmentRouter = require("./routes/attachment");
 const rolesRouter = require("./routes/roles");
 const app = express();
 
@@ -38,6 +39,7 @@ app.use("/users", usersRouter);
 app.use("/categories", categoriesRouter);
 app.use("/tags", tagsRouter);
 app.use("/entries", entriesRouter);
+app.use("/attachment", attachmentRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

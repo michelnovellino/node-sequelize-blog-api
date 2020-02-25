@@ -1,7 +1,6 @@
 const sequelize = require("sequelize");
 const Sequelize = require("./db");
-const Entry = require("./entries.model");
-
+ 
 const Attachment = Sequelize.define(
   "attachments",
   {
@@ -17,7 +16,8 @@ const Attachment = Sequelize.define(
   },
   {
     // options
+    underscored: true
   }
 );
-Attachment.belongsTo(Entry);
+/* Attachment.sync({ force: false }).then(act => {}); */ 
 module.exports = Attachment;

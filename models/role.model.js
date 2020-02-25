@@ -15,11 +15,9 @@ const Role = Sequelize.define(
     underscored: true
   }
 );
+ /* 
 Role.sync({ force: false }).then(async act => {
-  /*   let exist = await Role.findAll();
-  console.log("EMPEZO ROLES");
-  console.log("exist >>>>> ", exist.roles)
-  if (!exist || exist.length <= 0) {
+   if (!exist || exist.length <= 0) {
     await Role.create({
       name: "user"
     });
@@ -29,8 +27,8 @@ Role.sync({ force: false }).then(async act => {
     await Role.create({
       name: "super"
     });
-  }
-  console.log("TERMINO ROLES"); */
-});
+  } 
+  console.log("TERMINO ROLES");
+});*/
 
 module.exports = Role;

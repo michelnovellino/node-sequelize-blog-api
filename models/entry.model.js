@@ -1,8 +1,8 @@
 const sequelize = require("sequelize");
 const Sequelize = require("./db");
 const User = require("./user.model");
-const Categories = require("./categories.model");
-const Taxonomy = require("./entry.taxonomy.model");
+const Category = require("./categories.model");
+const Taxonomy = require("./taxonomy.model");
 const Entries = Sequelize.define(
   "entries",
   {
@@ -22,8 +22,11 @@ const Entries = Sequelize.define(
   }
 );
 
-/* Entries.belongsTo(User);
-Entries.belongsTo(Categories); */
-/* Entries.sync({ force: false }).then(act => {});
-Taxonomy.sync({ force: false }).then(act => {}); */
+Entries.belongsTo(User);
+Entries.belongsTo(Category);
+
+/* Entries.sync({ force: false }).then(act => {
+  Taxonomy.sync({ force: false }).then(act => {});
+});
+ */
 module.exports = { Entries, Taxonomy };

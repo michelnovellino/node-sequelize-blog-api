@@ -30,7 +30,7 @@ controller.add = function(req, res) {
   Entry.create(body)
     .then(() =>
       Entry.findOrCreate({
-        where: { email: body.email }
+        where: { email: body.title }
       })
     )
     .then(([Entry, created]) => {

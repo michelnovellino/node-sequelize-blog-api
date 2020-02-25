@@ -15,6 +15,7 @@ const Category = Sequelize.define(
     underscored: true
   }
 );
+/* 
 Category.sync({ force: false }).then(async act => {
   let exist = await Category.findOne({ where: { name: "uncategorized" } });
   if (!exist) {
@@ -25,6 +26,7 @@ Category.sync({ force: false }).then(async act => {
       .catch(err => {
         console.error({ error: err });
       });
-  }
+  } 
 });
+*/
 module.exports = Category;
