@@ -3,8 +3,9 @@ const Attachment = require("../models/attachment.model");
 const controller = {};
 
 controller.test = function(req, res) {
+  console.log(req.body)
   res.json({
-    data: req.file
+    data: req.file +"aaa"
   });
 };
 
