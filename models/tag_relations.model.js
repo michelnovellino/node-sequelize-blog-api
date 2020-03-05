@@ -1,9 +1,9 @@
 const sequelize = require("sequelize");
 const Sequelize = require("./db");
-const Entry = require("./entry.model");
-const Tag = require("./tag.model");
-const Taxonomy = Sequelize.define(
-  "entries_taxonomy",
+/* const Entry = require("./entry.model");
+const Tag = require("./tag.model"); */
+const TagRelations = Sequelize.define(
+  "tag_relations",
   {
     entry_id: {
       type: sequelize.INTEGER,
@@ -22,6 +22,6 @@ const Taxonomy = Sequelize.define(
   }
 );
 
-/* Taxonomy.hasMany(Entry);
-Taxonomy.hasMany(Tag); */
-module.exports = Taxonomy;
+/* TagRelations.hasMany(Entry);
+TagRelations.hasMany(Tag); */
+module.exports = TagRelations;

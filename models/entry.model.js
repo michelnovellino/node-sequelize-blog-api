@@ -2,7 +2,7 @@ const sequelize = require("sequelize");
 const Sequelize = require("./db");
 const User = require("./user.model");
 const Category = require("./categories.model");
-const Taxonomy = require("./taxonomy.model");
+const TagRelations = require("./tag_relations.model");
 const Entries = Sequelize.define(
   "entries",
   {
@@ -26,7 +26,8 @@ Entries.belongsTo(User);
 Entries.belongsTo(Category);
 
 /* Entries.sync({ force: false }).then(act => {
-  Taxonomy.sync({ force: false }).then(act => {});
+  TagRelations.sync({ force: false }).then(act => {});
 });
+
  */
-module.exports = { Entries, Taxonomy };
+module.exports = { Entries, TagRelations };

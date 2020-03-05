@@ -19,18 +19,18 @@ const _instance = multer({
     var filetypes = /jpeg|jpg/;
     var mimetype = filetypes.test(file.mimetype);
     var extname = filetypes.test(path.extname(file.originalname).toLowerCase());
- 
+
     if (mimetype && extname) {
       return cb(null, true);
     }
     req.fileValidationError = "goes wrong on the mimetype";
-    console.log("here ",req.fileValidationError)
+    console.log("here ", req.fileValidationError);
     cb({
       error: "File upload only supports the following filetypes - " + filetypes
     });
   }
 });
-const uploadOne = function(req, res,next) {
+const uploadOne = function(req, res, next) {
   _instance.single("image")(req, res, function(err) {
     if (req.fileValidationError) {
       return res.end(req.fileValidationError);
@@ -38,4 +38,12 @@ const uploadOne = function(req, res,next) {
     next();
   });
 };
-module.exports = { uploadOne };
+const uploadMany = function(req, res, next) {
+  _instance.array("images")(req, res, function(err) {
+    if (req.fileValidationError) {
+      return res.end(req.fileValidationError);
+    }
+    next();
+  });
+};
+module.exports = { uploadOne, uploadMany };
