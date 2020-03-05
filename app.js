@@ -14,6 +14,7 @@ const categoriesRouter = require("./routes/categories");
 const attachmentRouter = require("./routes/attachment");
 const rolesRouter = require("./routes/roles");
 const app = express();
+const fs = require("fs");
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -33,6 +34,11 @@ app.use(
 );
 app.use(express.static(path.join(__dirname, "public")));
 
+
+
+readStream = fs.createReadStream("names.txt");
+writeStream = fs.createWriteStream("names2.txt");
+readStream.pipe(writeStream)
 app.use("/", indexRouter);
 app.use("/roles", rolesRouter);
 app.use("/users", usersRouter);

@@ -5,7 +5,7 @@ controller.getAll = function(req, res, next) {
   User.findAll()
     .then(Users => {
       console.log("Connection has been established successfully.");
-      res.status(200).json({ success: Users });
+      res.status(200).json({ data: Users });
     })
     .catch(err => {
       console.error("Unable to connect to the database:", err);

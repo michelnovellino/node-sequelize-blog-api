@@ -1,5 +1,12 @@
 const Attachment = require("../models/attachment.model");
+
 const controller = {};
+
+controller.test = function(req, res) {
+  res.json({
+    data: req.file
+  });
+};
 
 controller.getAll = function(req, res, next) {
   Attachment.findAll()

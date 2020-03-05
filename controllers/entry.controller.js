@@ -1,11 +1,24 @@
-const Entry = require("../models/entry.model");
+const { Entries: Entry } = require("../models/entry.model");
+const User = require("../models/user.model");
+const Category = require("../models/categories.model");
 const controller = {};
 
 controller.getAll = function(req, res, next) {
-  Entry.findAll()
+  Entry.findAll({
+    include: [
+      {
+        model: User,
+        required: true
+      },
+      {
+        model: Category,
+        required: true
+      }
+    ]
+  })
     .then(Entrys => {
       console.log("Connection has been established successfully.");
-      res.status(200).json({ success: Entrys });
+      res.status(200).json({ data: Entrys });
     })
     .catch(err => {
       console.error("Unable to connect to the database:", err);
@@ -15,8 +28,20 @@ controller.getAll = function(req, res, next) {
 
 controller.getOne = function(req, res, next) {
   let id = req.params.id;
+
   if (!id) res.status(400).json({ error: "id not provided" });
-  Entry.findByPk(id)
+  Entry.findByPk(id, {
+    include: [
+      {
+        model: User,
+        required: true
+      },
+      {
+        model: Category,
+        required: true
+      }
+    ]
+  })
     .then(Entrys => {
       res.status(200).json({ data: Entrys });
     })
