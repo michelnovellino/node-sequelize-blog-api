@@ -2,7 +2,9 @@ const User = require("../models/user.model");
 const controller = {};
 
 controller.getAll = function(req, res, next) {
-  User.findAll()
+  User.findAll({
+    attributes: { exclude: ["password"] }
+  })
     .then(Users => {
       console.log("Connection has been established successfully.");
       res.status(200).json({ data: Users });
@@ -16,7 +18,7 @@ controller.getAll = function(req, res, next) {
 controller.getOne = function(req, res, next) {
   let id = req.params.id;
   if (!id) res.status(400).json({ error: "id not provided" });
-  User.findByPk(id)
+  User.findByPk(id, { attributes: { exclude: ["password"] } })
     .then(Users => {
       res.status(200).json({ data: Users });
     })

@@ -1,6 +1,9 @@
 const { Entries: Entry } = require("../models/entry.model");
 const User = require("../models/user.model");
 const Category = require("../models/categories.model");
+const TagRelations = require("../models/tag_relations.model");
+const Tag = require("../models/tag.model");
+
 const controller = {};
 
 controller.getAll = function(req, res, next) {
@@ -8,13 +11,14 @@ controller.getAll = function(req, res, next) {
     include: [
       {
         model: User,
-        required: true
+        attributes:{exclude:["password"]},
+        required: true,
       },
       {
         model: Category,
         required: true
-      }
-    ]
+      },
+    ],
   })
     .then(Entrys => {
       console.log("Connection has been established successfully.");
@@ -34,6 +38,7 @@ controller.getOne = function(req, res, next) {
     include: [
       {
         model: User,
+        attributes:{exclude:["password"]},
         required: true
       },
       {

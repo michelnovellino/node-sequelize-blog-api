@@ -36,7 +36,8 @@ const User = Sequelize.define(
   },
   {
     // options
-    underscored: true
+    underscored: true,
+
   }
 );
 

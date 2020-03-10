@@ -2,6 +2,7 @@ const sequelize = require("sequelize");
 const Sequelize = require("./db");
 const User = require("./user.model");
 const Category = require("./categories.model");
+const Tag = require("./tag.model");
 const TagRelations = require("./tag_relations.model");
 const Entries = Sequelize.define(
   "entries",
@@ -18,16 +19,19 @@ const Entries = Sequelize.define(
   },
   {
     // options
-    underscored: true
+    underscored: true,
   }
 );
 
 Entries.belongsTo(User);
 Entries.belongsTo(Category);
-
-/* Entries.sync({ force: false }).then(act => {
-  TagRelations.sync({ force: false }).then(act => {});
-});
-
+/* TagRelations.hasMany(Entries); */
+/* Entries.belongsToMany(Tag, { through: TagRelations });
+Tag.belongsToMany(Entries, { through: TagRelations }); */
+/* TagRelations.belongsTo(Entries);
+Entries.belongsToMany(TagRelations, {through: 'tag_relations', foreignKey: 'tag_id', as: 'tags'})
  */
+/*  Entries.sync({ force: false }).then(act => {
+});  */
+
 module.exports = { Entries, TagRelations };

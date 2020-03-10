@@ -1,7 +1,5 @@
 const sequelize = require("sequelize");
 const Sequelize = require("./db");
-/* const Entry = require("./entry.model");
-const Tag = require("./tag.model"); */
 const TagRelations = Sequelize.define(
   "tag_relations",
   {
@@ -12,7 +10,7 @@ const TagRelations = Sequelize.define(
     },
     tag_id: {
       type: sequelize.INTEGER,
-      references: { model: "tags", key: "id" },
+      references: { model: "tag", key: "id" },
       allowNull: false
     }
   },
